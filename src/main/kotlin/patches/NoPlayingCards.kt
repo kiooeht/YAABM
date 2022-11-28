@@ -9,8 +9,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard
     method = "hasEnoughEnergy"
 )
 object NoPlayingCards {
+    internal var allowedEnergy: Int = 0
+
     @JvmStatic
     fun Prefix(__instance: AbstractCard): SpireReturn<Boolean> {
+        if (allowedEnergy >= __instance.costForTurn) {
+            return SpireReturn.Continue()
+        }
         return SpireReturn.Return(__instance.isInAutoplay)
     }
 }
