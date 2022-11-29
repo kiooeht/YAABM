@@ -20,6 +20,9 @@ object EnergyPotionAllowCardPlay {
         AbstractDungeon.actionManager
             .addToBottom(object : AbstractGameAction() {
                 override fun update() {
+                    if (NoPlayingCards.allowedEnergy < 0) {
+                        NoPlayingCards.allowedEnergy = 0
+                    }
                     NoPlayingCards.allowedEnergy += ___potency
                     isDone = true
                 }
@@ -39,7 +42,7 @@ object UsePotionEnergy {
     fun Insert(c: AbstractCard) {
         NoPlayingCards.allowedEnergy -= c.costForTurn
         if (NoPlayingCards.allowedEnergy < 0) {
-            NoPlayingCards.allowedEnergy = 0
+            NoPlayingCards.allowedEnergy = -1
         }
     }
 

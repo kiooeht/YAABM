@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard
     method = "hasEnoughEnergy"
 )
 object NoPlayingCards {
-    internal var allowedEnergy: Int = 0
+    internal var allowedEnergy: Int = -1
 
     @JvmStatic
     fun Prefix(__instance: AbstractCard): SpireReturn<Boolean> {
