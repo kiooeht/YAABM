@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.yaabm.patches
 
+import basemod.ReflectionHacks
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2
 import com.megacrit.cardcrawl.actions.GameActionManager
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
@@ -16,6 +17,8 @@ object AutoEndTurn {
         if (ENABLED && __instance.phase == GameActionManager.Phase.WAITING_ON_USER &&
             !AbstractDungeon.player.endTurnQueued && !AbstractDungeon.actionManager.turnHasEnded &&
             AbstractDungeon.actionManager.actions.isEmpty() && AbstractDungeon.actionManager.cardQueue.isEmpty()) {
+            ReflectionHacks.privateMethod(GameActionManager::class.java, "callEndOfTurnActions")
+                .invoke<Unit>(AbstractDungeon.actionManager)
             AbstractDungeon.overlayMenu.endTurnButton.disable(true)
         }
     }
