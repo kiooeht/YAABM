@@ -1,4 +1,4 @@
-package patches
+package com.evacipated.cardcrawl.mod.yaabm.patches
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch2
 import com.megacrit.cardcrawl.actions.GameActionManager

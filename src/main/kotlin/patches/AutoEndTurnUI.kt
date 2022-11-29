@@ -1,4 +1,4 @@
-package patches
+package com.evacipated.cardcrawl.mod.yaabm.patches
 
 import basemod.ReflectionHacks
 import com.badlogic.gdx.Gdx
