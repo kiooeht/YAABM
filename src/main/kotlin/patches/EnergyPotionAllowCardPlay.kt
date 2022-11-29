@@ -1,6 +1,5 @@
 package com.evacipated.cardcrawl.mod.yaabm.patches
 
-import com.evacipated.cardcrawl.mod.yaabm.patches.NoPlayingCards
 import com.evacipated.cardcrawl.modthespire.lib.*
 import com.megacrit.cardcrawl.actions.AbstractGameAction
 import com.megacrit.cardcrawl.cards.AbstractCard
@@ -8,6 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer
 import com.megacrit.cardcrawl.core.EnergyManager
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon
 import com.megacrit.cardcrawl.potions.EnergyPotion
+import com.megacrit.cardcrawl.rooms.AbstractRoom
 import javassist.CtBehavior
 
 @SpirePatch2(
@@ -51,5 +51,16 @@ object UsePotionEnergy {
             val finalMatcher = Matcher.MethodCallMatcher(EnergyManager::class.java, "use")
             return LineFinder.findInOrder(ctBehavior, finalMatcher)
         }
+    }
+}
+
+@SpirePatch2(
+    clz = AbstractRoom::class,
+    method = "applyEndOfTurnPreCardPowers"
+)
+object ResetEnergyUse {
+    @JvmStatic
+    fun Prefix() {
+        NoPlayingCards.allowedEnergy = -1
     }
 }
