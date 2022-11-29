@@ -13,7 +13,7 @@ object NoPlayingCards {
 
     @JvmStatic
     fun Prefix(__instance: AbstractCard): SpireReturn<Boolean> {
-        if (allowedEnergy >= __instance.costForTurn) {
+        if (allowedEnergy >= 0 && allowedEnergy >= __instance.costForTurn) {
             return SpireReturn.Continue()
         }
         return SpireReturn.Return(__instance.isInAutoplay)
